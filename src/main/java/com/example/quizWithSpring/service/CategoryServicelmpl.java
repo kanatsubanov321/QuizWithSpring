@@ -1,16 +1,21 @@
 package com.example.quizWithSpring.service;
 
 import com.example.quizWithSpring.model.Category;
+import com.example.quizWithSpring.model.Question;
 import com.example.quizWithSpring.repository.CategoryRep;
+import com.example.quizWithSpring.repository.QuestionRep;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class CategoryServicelmpl implements CategoryService {
     @Autowired
     private CategoryRep categoryRep;
+    @Autowired
+    private QuestionService questionService;
 
     @Override
     public List<Category> findAllCategories() {
@@ -40,5 +45,17 @@ public class CategoryServicelmpl implements CategoryService {
     @Override
     public void deleteAllCategories() {
         categoryRep.deleteAll();
+    }
+
+    @Override
+    public List<Question> getQuestionsByCategory(Long id) {
+        List<Question> questions = questionService.findAllQuestions();
+        ArrayList<Question> questions1 = new ArrayList<>();
+        for (Question question : questions) {
+            if (question.getId().equals(id)) {
+                questions1.add(question);
+            }
+        }
+        return questions1;
     }
 }

@@ -1,6 +1,7 @@
 package com.example.quizWithSpring.controller;
 
 import com.example.quizWithSpring.model.Category;
+import com.example.quizWithSpring.model.Question;
 import com.example.quizWithSpring.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,6 +18,11 @@ public class CategoryController {
     @GetMapping
     public List<Category> getCategories() {
         return this.categoryService.findAllCategories();
+    }
+
+    @GetMapping("/{id}/questions")
+    public List<Question> getQuestionsByCateogory(@PathVariable Long id) {
+        return this.categoryService.getQuestionsByCategory(id);
     }
 
     @GetMapping("/{id}")
@@ -44,4 +50,5 @@ public class CategoryController {
     public void deleteAllCategories() {
         this.categoryService.deleteAllCategories();
     }
+
 }

@@ -8,19 +8,22 @@ public class Quiz {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Integer totalGrade;
+
+    private int totalGrade;
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
     private LocalDateTime time;
 
     public Quiz() {
     }
 
-    public Quiz(Integer totalGrade, User user, LocalDateTime time) {
+    public Quiz(int totalGrade, User user, LocalDateTime time) {
         this.totalGrade = totalGrade;
         this.user = user;
-        this.time = LocalDateTime.now();
+        this.time = time;
     }
 
     public Long getId() {
@@ -31,11 +34,11 @@ public class Quiz {
         this.id = id;
     }
 
-    public Integer getTotalGrade() {
+    public int getTotalGrade() {
         return totalGrade;
     }
 
-    public void setTotalGrade(Integer totalGrade) {
+    public void setTotalGrade(int totalGrade) {
         this.totalGrade = totalGrade;
     }
 

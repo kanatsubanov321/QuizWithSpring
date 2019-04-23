@@ -1,5 +1,6 @@
 package com.example.quizWithSpring.service;
 
+import com.example.quizWithSpring.model.Answer;
 import com.example.quizWithSpring.model.Question;
 
 import java.util.List;
@@ -11,4 +12,5 @@ public interface QuestionService {
     Question updateQuestion(Question q);
     void deleteQuestionById(Long id);
     void deleteAllQuestions();
+    List<Answer> getAnswersByQuestion(Long id);
 }

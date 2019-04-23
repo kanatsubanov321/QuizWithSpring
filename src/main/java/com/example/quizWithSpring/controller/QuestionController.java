@@ -1,5 +1,6 @@
 package com.example.quizWithSpring.controller;
 
+import com.example.quizWithSpring.model.Answer;
 import com.example.quizWithSpring.model.Question;
 import com.example.quizWithSpring.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,11 @@ public class QuestionController {
     @GetMapping("/{id}")
     public Question getQuestionById(@PathVariable Long id) {
         return this.questionService.findQuestionById(id);
+    }
+
+    @GetMapping("/{id}/answers")
+    public List<Answer> getAnswersByQuestion(@PathVariable Long id) {
+        return this.questionService.getAnswersByQuestion(id);
     }
 
     @PostMapping

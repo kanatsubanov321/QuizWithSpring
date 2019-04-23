@@ -11,4 +11,5 @@ public interface QuizService {
     Quiz updateQuiz(Quiz q);
     void deleteQuizById(Long id);
     void deleteAllQuizzes();
+
 }

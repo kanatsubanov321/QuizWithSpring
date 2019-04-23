@@ -1,16 +1,20 @@
 package com.example.quizWithSpring.service;
 
+import com.example.quizWithSpring.model.Answer;
 import com.example.quizWithSpring.model.Question;
 import com.example.quizWithSpring.repository.QuestionRep;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class QuestionServicelmpl implements QuestionService {
     @Autowired
     private QuestionRep questionRep;
+    @Autowired
+    private AnswerService answerService;
 
     @Override
     public List<Question> findAllQuestions() {
@@ -41,4 +45,15 @@ public class QuestionServicelmpl implements QuestionService {
     public void deleteAllQuestions() {
         questionRep.deleteAll();
     }
+
+    @Override
+    public List<Answer> getAnswersByQuestion(Long id) {
+        List<Answer> answers = answerService.findAllAnswers();
+        ArrayList<Answer> answers1 = new ArrayList<>();
+        for (Answer answer: answers) {
+            if (answer.getQuestion().getId().equals(id)) {
+                answers1.add(answer);
+            }
+        }
+        return answers1;    }
 }

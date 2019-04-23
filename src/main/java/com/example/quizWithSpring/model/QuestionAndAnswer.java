@@ -7,15 +7,19 @@ public class QuestionAndAnswer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToOne
+
+    @ManyToOne
     @JoinColumn(name = "quiz_id")
     private Quiz quiz;
-    @OneToMany
+
+    @ManyToOne
     @JoinColumn(name = "question_id")
     private Question question;
-    @OneToMany
+
+    @ManyToOne
     @JoinColumn(name = "answer_id")
     private Answer answer;
+
     private boolean isCorrect;
 
     public QuestionAndAnswer() {

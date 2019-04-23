@@ -1,7 +1,10 @@
 package com.example.quizWithSpring.controller;
 
+import com.example.quizWithSpring.model.Quiz;
 import com.example.quizWithSpring.model.User;
+import com.example.quizWithSpring.service.QuizService;
 import com.example.quizWithSpring.service.UserService;
+import com.example.quizWithSpring.util.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +16,8 @@ import java.util.List;
 public class UserController {
     @Autowired
     private UserService userService;
+    @Autowired
+    private QuizService quizService;
 
     @GetMapping
     public List<User> getQuizzes() {
@@ -20,8 +25,18 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public User getUserById(@PathVariable Long id) {
+    public User getUserById(@PathVariable Long id,
+                            @RequestHeader(name = "user-login") String login,
+                            @RequestHeader(name = "user-password") String password) {
+
+        if(!userService.checkUser(id,login,password)){
+            return null;
+        }
         return this.userService.findUserById(id);
+    }
+    @GetMapping("/{id}/quizzes")
+    public List<Quiz> getQuizByUser(@PathVariable Long id) {
+        return this.userService.getQuizzes(id);
     }
 
     @PostMapping
@@ -43,5 +58,15 @@ public class UserController {
     @DeleteMapping
     public void deleteAllUsers() {
         this.userService.deleteAllUsers();
+    }
+
+    @PostMapping("/{id}/test")
+    @ResponseStatus(HttpStatus.CREATED)
+    public boolean goodLuck(@PathVariable Long id,
+                            @RequestBody Test t) {
+        if (userService.checkAnswer(t.getId(), t.getAnswer(), id)) {
+            return true;
+        }
+        return false;
     }
 }

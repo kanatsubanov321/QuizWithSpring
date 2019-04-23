@@ -2,6 +2,7 @@ package com.example.quizWithSpring.controller;
 
 import com.example.quizWithSpring.model.Quiz;
 import com.example.quizWithSpring.service.QuizService;
+import com.example.quizWithSpring.util.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

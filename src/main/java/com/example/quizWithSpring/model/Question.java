@@ -2,13 +2,15 @@ package com.example.quizWithSpring.model;
 
 import javax.persistence.*;
 
+@Entity
 public class Question {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String text;
     private String description;
-    private Integer grade;
+
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
@@ -16,10 +18,9 @@ public class Question {
     public Question() {
     }
 
-    public Question(String text, String description, Integer grade, Category category) {
+    public Question(String text, String description, Category category) {
         this.text = text;
         this.description = description;
-        this.grade = grade;
         this.category = category;
     }
 
@@ -39,20 +40,12 @@ public class Question {
         this.text = text;
     }
 
-    public String getDecription() {
+    public String getDescription() {
         return description;
     }
 
-    public void setDecription(String decription) {
-        this.description = decription;
-    }
-
-    public Integer getGrade() {
-        return grade;
-    }
-
-    public void setGrade(Integer grade) {
-        this.grade = grade;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Category getCategory() {
