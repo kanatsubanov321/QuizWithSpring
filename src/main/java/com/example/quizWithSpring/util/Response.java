@@ -2,17 +2,15 @@ package com.example.quizWithSpring.util;
 
 public class Response {
     private boolean success;
-    private String message;
-    private Object quiz;
+    private String comment;
 
     public Response() {
 
     }
 
-    public Response(boolean success, String message, Object quiz) {
+    public Response(boolean success, String comment) {
         this.success = success;
-        this.message = message;
-        this.quiz = quiz;
+        this.comment = comment;
     }
 
     public boolean isSuccess() {
@@ -24,18 +22,10 @@ public class Response {
     }
 
     public String getMessage() {
-        return message;
+        return comment;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public Object getQuiz() {
-        return quiz;
-    }
-
-    public void setQuiz(Object quiz) {
-        this.quiz = quiz;
+    public void setMessage(String comment) {
+        this.comment = comment;
     }
 }

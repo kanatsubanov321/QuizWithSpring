@@ -26,6 +26,8 @@ public class UserServicelmpl implements UserService {
     private UserService userService;
     @Autowired
     private QuestionAndAnswerRep questionAndAnswerRep;
+    @Autowired
+    private QuestionAndAnswerService questionAndAnswerService;
 
     @Override
     public List<User> findAllUsers() {
@@ -122,4 +124,16 @@ public class UserServicelmpl implements UserService {
         return false;
     }
 
+    @Override
+    public List<QuestionAndAnswer> getQuestionAndAnswerByUser(Long id) {
+        List<QuestionAndAnswer> questionAndAnswers = questionAndAnswerService.findAllQuestionAndAnswers();
+        User user = userService.findUserById(id);
+        List<QuestionAndAnswer> questionAndAnswers1 = new ArrayList<>();
+        for (QuestionAndAnswer questionAndAnswer : questionAndAnswers) {
+            if (user.getId().equals(id)) {
+                questionAndAnswers1.add(questionAndAnswer);
+            }
+        }
+        return questionAndAnswers1;
+    }
 }

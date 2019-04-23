@@ -1,5 +1,6 @@
 package com.example.quizWithSpring.service;
 
+import com.example.quizWithSpring.model.QuestionAndAnswer;
 import com.example.quizWithSpring.model.Quiz;
 import com.example.quizWithSpring.model.User;
 
@@ -15,4 +16,6 @@ public interface UserService {
     boolean checkAnswer(Long id, String answer, Long userId);
     boolean checkUser(Long id, String login,String password);
     List<Quiz> getQuizzes(Long id);
+    List<QuestionAndAnswer> getQuestionAndAnswerByUser(Long id);
+
 }

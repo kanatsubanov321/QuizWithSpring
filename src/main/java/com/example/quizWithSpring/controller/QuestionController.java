@@ -3,10 +3,12 @@ package com.example.quizWithSpring.controller;
 import com.example.quizWithSpring.model.Answer;
 import com.example.quizWithSpring.model.Question;
 import com.example.quizWithSpring.service.QuestionService;
+import com.example.quizWithSpring.util.QuestionAndAnswersObj;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @RestController
@@ -49,5 +51,15 @@ public class QuestionController {
     @DeleteMapping
     public void deleteAllQuestions() {
         this.questionService.deleteAllQuestions();
+    }
+
+    @GetMapping("/{id}/listAll")
+    private List<String> getQuestionAndAnswers(@PathVariable Long id) {
+        return questionService.getQuestionAndAnswers(id);
+    }
+
+    @GetMapping("/{id}/list")
+    private QuestionAndAnswersObj getQuestionAndAnswers2(@PathVariable Long id) {
+        return questionService.getQuestionAndAnswers2(id);
     }
 }

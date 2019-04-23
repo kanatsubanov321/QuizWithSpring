@@ -1,9 +1,11 @@
 package com.example.quizWithSpring.controller;
 
+import com.example.quizWithSpring.model.QuestionAndAnswer;
 import com.example.quizWithSpring.model.Quiz;
 import com.example.quizWithSpring.model.User;
 import com.example.quizWithSpring.service.QuizService;
 import com.example.quizWithSpring.service.UserService;
+import com.example.quizWithSpring.util.Response;
 import com.example.quizWithSpring.util.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -39,6 +41,11 @@ public class UserController {
         return this.userService.getQuizzes(id);
     }
 
+    @GetMapping("/{id}/ques")
+    public List<QuestionAndAnswer> getQuestionsAndAnswersByUser(@PathVariable Long id) {
+        return this.userService.getQuestionAndAnswerByUser(id);
+    }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public User saveUser(@RequestBody User u) {
@@ -62,11 +69,15 @@ public class UserController {
 
     @PostMapping("/{id}/test")
     @ResponseStatus(HttpStatus.CREATED)
-    public boolean goodLuck(@PathVariable Long id,
-                            @RequestBody Test t) {
-        if (userService.checkAnswer(t.getId(), t.getAnswer(), id)) {
-            return true;
+    public Response goodLuck(@PathVariable Long id,
+                             @RequestBody Test t) {
+        try {
+            if (userService.checkAnswer(t.getId(), t.getAnswer(), id)) {
+                return new Response(true,"Great! You answer is right");
         }
-        return false;
+        }catch (Exception e) {
+            return new Response(false,e.toString());
+        }
+        return new Response(false,"Wrong");
     }
 }

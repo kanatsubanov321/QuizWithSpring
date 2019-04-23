@@ -37,37 +37,37 @@ public class Bootstrap implements CommandLineRunner {
         Question question = new Question();
         question.setCategory(category);
         question.setDescription("first question");
-        question.setText("How are you?");
+        question.setText("How ___ you?");
         questionService.saveQuestion(question);
 
         Answer answer = new Answer();
         answer.setCorrect(true);
         answer.setQuestion(question);
-        answer.setText("Good");
+        answer.setText("are");
         answerService.saveAnswer(answer);
 
         Answer answer1 = new Answer();
         answer1.setCorrect(false);
         answer1.setQuestion(question);
-        answer1.setText("Bad");
+        answer1.setText("is");
         answerService.saveAnswer(answer1);
 
         Question question1 = new Question();
         question1.setCategory(category1);
-        question1.setText("Wir geht es dir?");
+        question1.setText("Wir geht es ___?");
         question1.setDescription("Erste frage");
         questionService.saveQuestion(question1);
 
         Answer answer2 = new Answer();
         answer2.setCorrect(true);
         answer2.setQuestion(question1);
-        answer2.setText("Gut");
+        answer2.setText("dir");
         answerService.saveAnswer(answer2);
 
         Answer answer3 = new Answer();
         answer3.setCorrect(false);
         answer3.setQuestion(question1);
-        answer3.setText("Schlecht");
+        answer3.setText("dich");
         answerService.saveAnswer(answer3);
 
         User user = new User();
