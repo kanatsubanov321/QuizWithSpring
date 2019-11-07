@@ -7,11 +7,6 @@ public class Test {
     public Test() {
     }
 
-    public Test(Long id, String answer) {
-        this.id = id;
-        this.answer = answer;
-    }
-
     public Long getId() {
         return id;
     }

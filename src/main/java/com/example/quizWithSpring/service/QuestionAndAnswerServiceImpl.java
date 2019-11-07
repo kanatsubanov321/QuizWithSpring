@@ -2,15 +2,17 @@ package com.example.quizWithSpring.service;
 
 import com.example.quizWithSpring.model.QuestionAndAnswer;
 import com.example.quizWithSpring.repository.QuestionAndAnswerRep;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class QuestionAndAnswerServicelmpl implements QuestionAndAnswerService {
-    @Autowired
-    private QuestionAndAnswerRep questionAndAnswerRep;
+public class QuestionAndAnswerServiceImpl implements QuestionAndAnswerService {
+    private final QuestionAndAnswerRep questionAndAnswerRep;
+
+    public QuestionAndAnswerServiceImpl(QuestionAndAnswerRep questionAndAnswerRep) {
+        this.questionAndAnswerRep = questionAndAnswerRep;
+    }
 
     @Override
     public List<QuestionAndAnswer> findAllQuestionAndAnswers() {

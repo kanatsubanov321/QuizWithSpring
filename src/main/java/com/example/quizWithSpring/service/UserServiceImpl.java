@@ -1,33 +1,39 @@
 package com.example.quizWithSpring.service;
 
-import com.example.quizWithSpring.model.*;
+import com.example.quizWithSpring.model.Answer;
+import com.example.quizWithSpring.model.QuestionAndAnswer;
+import com.example.quizWithSpring.model.Quiz;
+import com.example.quizWithSpring.model.User;
 import com.example.quizWithSpring.repository.QuestionAndAnswerRep;
 import com.example.quizWithSpring.repository.QuizRep;
 import com.example.quizWithSpring.repository.UserRep;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class UserServicelmpl implements UserService {
-    @Autowired
-    private UserRep userRep;
-    @Autowired
-    private QuizRep quizRep;
-    @Autowired
-    private QuestionService questionService;
-    @Autowired
-    private AnswerService answerService;
-    @Autowired
-    private QuizService quizService;
-    @Autowired
-    private UserService userService;
-    @Autowired
-    private QuestionAndAnswerRep questionAndAnswerRep;
-    @Autowired
-    private QuestionAndAnswerService questionAndAnswerService;
+public class UserServiceImpl implements UserService {
+    private final UserRep userRep;
+    private final QuizRep quizRep;
+    private final QuestionService questionService;
+    private final AnswerService answerService;
+    private final QuizService quizService;
+    private final UserService userService;
+    private final QuestionAndAnswerRep questionAndAnswerRep;
+    private final QuestionAndAnswerService questionAndAnswerService;
+
+    public UserServiceImpl(UserRep userRep, QuizRep quizRep, QuestionService questionService, AnswerService answerService, QuizService quizService, UserService userService, QuestionAndAnswerRep questionAndAnswerRep, QuestionAndAnswerService questionAndAnswerService) {
+        this.userRep = userRep;
+        this.quizRep = quizRep;
+        this.questionService = questionService;
+        this.answerService = answerService;
+        this.quizService = quizService;
+        this.userService = userService;
+        this.questionAndAnswerRep = questionAndAnswerRep;
+        this.questionAndAnswerService = questionAndAnswerService;
+    }
 
     @Override
     public List<User> findAllUsers() {
@@ -116,12 +122,9 @@ public class UserServicelmpl implements UserService {
         return false;
     }
 
-    public boolean checkUserPassword(Long id, String login, String password) {
-        if (userService.findUserById(id).getLogin().equals(login) &&
-                userService.findUserById(id).getPassword().equals(password)) {
-            return true;
-        }
-        return false;
+    private boolean checkUserPassword(Long id, String login, String password) {
+        return userService.findUserById(id).getLogin().equals(login) &&
+                userService.findUserById(id).getPassword().equals(password);
     }
 
     @Override

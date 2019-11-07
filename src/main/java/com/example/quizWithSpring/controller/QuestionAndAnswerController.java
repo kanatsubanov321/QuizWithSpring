@@ -2,7 +2,6 @@ package com.example.quizWithSpring.controller;
 
 import com.example.quizWithSpring.model.QuestionAndAnswer;
 import com.example.quizWithSpring.service.QuestionAndAnswerService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,8 +10,11 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/questionAndAnswer")
 public class QuestionAndAnswerController {
-    @Autowired
-    private QuestionAndAnswerService questionAndAnswerService;
+    private final QuestionAndAnswerService questionAndAnswerService;
+
+    public QuestionAndAnswerController(QuestionAndAnswerService questionAndAnswerService) {
+        this.questionAndAnswerService = questionAndAnswerService;
+    }
 
     @GetMapping
     public List<QuestionAndAnswer> getQuestionAndAnswers() {
@@ -32,7 +34,7 @@ public class QuestionAndAnswerController {
 
     @PutMapping
     public QuestionAndAnswer updateQuestionAndAnswer(@RequestBody QuestionAndAnswer q) {
-     return this.questionAndAnswerService.updateQuestionAndAnswer(q);
+        return this.questionAndAnswerService.updateQuestionAndAnswer(q);
     }
 
     @DeleteMapping("/{id}")

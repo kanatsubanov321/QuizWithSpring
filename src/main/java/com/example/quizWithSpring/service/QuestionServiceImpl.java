@@ -4,20 +4,22 @@ import com.example.quizWithSpring.model.Answer;
 import com.example.quizWithSpring.model.Question;
 import com.example.quizWithSpring.repository.QuestionRep;
 import com.example.quizWithSpring.util.QuestionAndAnswersObj;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class QuestionServicelmpl implements QuestionService {
-    @Autowired
-    private QuestionRep questionRep;
-    @Autowired
-    private AnswerService answerService;
-    @Autowired
-    private QuestionService questionService;
+public class QuestionServiceImpl implements QuestionService {
+    private final QuestionRep questionRep;
+    private final AnswerService answerService;
+    private final QuestionService questionService;
+
+    public QuestionServiceImpl(QuestionRep questionRep, AnswerService answerService, QuestionService questionService) {
+        this.questionRep = questionRep;
+        this.answerService = answerService;
+        this.questionService = questionService;
+    }
 
     @Override
     public List<Question> findAllQuestions() {

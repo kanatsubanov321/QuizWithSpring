@@ -2,8 +2,6 @@ package com.example.quizWithSpring.controller;
 
 import com.example.quizWithSpring.model.Quiz;
 import com.example.quizWithSpring.service.QuizService;
-import com.example.quizWithSpring.util.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,8 +10,11 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/quiz")
 public class QuizController {
-    @Autowired
-    private QuizService quizService;
+    private final QuizService quizService;
+
+    public QuizController(QuizService quizService) {
+        this.quizService = quizService;
+    }
 
     @GetMapping
     public List<Quiz> getQuizzes() {

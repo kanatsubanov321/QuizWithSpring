@@ -11,8 +11,11 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/answer")
 public class AnswerController {
-    @Autowired
-    private AnswerService answerService;
+    private final AnswerService answerService;
+
+    public AnswerController(AnswerService answerService) {
+        this.answerService = answerService;
+    }
 
     @GetMapping
     public List<Answer> getAnswers() {

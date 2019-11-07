@@ -10,11 +10,6 @@ public class QuestionAndAnswersObj {
     public QuestionAndAnswersObj() {
     }
 
-    public QuestionAndAnswersObj(String question, List<String> answers) {
-        this.question = question;
-        this.answers = answers;
-    }
-
     public String getQuestion() {
         return question;
     }

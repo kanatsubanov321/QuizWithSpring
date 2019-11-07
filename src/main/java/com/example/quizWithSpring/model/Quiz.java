@@ -20,12 +20,6 @@ public class Quiz {
     public Quiz() {
     }
 
-    public Quiz(int totalGrade, User user, LocalDateTime time) {
-        this.totalGrade = totalGrade;
-        this.user = user;
-        this.time = time;
-    }
-
     public Long getId() {
         return id;
     }

@@ -3,7 +3,6 @@ package com.example.quizWithSpring.controller;
 import com.example.quizWithSpring.model.Category;
 import com.example.quizWithSpring.model.Question;
 import com.example.quizWithSpring.service.CategoryService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,8 +11,11 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/category")
 public class CategoryController {
-    @Autowired
-    private CategoryService categoryService;
+    private final CategoryService categoryService;
+
+    public CategoryController(CategoryService categoryService) {
+        this.categoryService = categoryService;
+    }
 
     @GetMapping
     public List<Category> getCategories() {
@@ -38,7 +40,7 @@ public class CategoryController {
 
     @PutMapping
     public Category updateCategory(@RequestBody Category c) {
-       return this.categoryService.updateCategory(c);
+        return this.categoryService.updateCategory(c);
     }
 
     @DeleteMapping("/{id}")

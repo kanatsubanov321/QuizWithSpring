@@ -7,7 +7,6 @@ import com.example.quizWithSpring.service.QuizService;
 import com.example.quizWithSpring.service.UserService;
 import com.example.quizWithSpring.util.Response;
 import com.example.quizWithSpring.util.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,10 +15,11 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/user")
 public class UserController {
-    @Autowired
-    private UserService userService;
-    @Autowired
-    private QuizService quizService;
+    private final UserService userService;
+
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
 
     @GetMapping
     public List<User> getQuizzes() {
@@ -31,11 +31,12 @@ public class UserController {
                             @RequestHeader(name = "user-login") String login,
                             @RequestHeader(name = "user-password") String password) {
 
-        if(!userService.checkUser(id,login,password)){
+        if (!userService.checkUser(id, login, password)) {
             return null;
         }
         return this.userService.findUserById(id);
     }
+
     @GetMapping("/{id}/quizzes")
     public List<Quiz> getQuizByUser(@PathVariable Long id) {
         return this.userService.getQuizzes(id);
@@ -73,11 +74,11 @@ public class UserController {
                              @RequestBody Test t) {
         try {
             if (userService.checkAnswer(t.getId(), t.getAnswer(), id)) {
-                return new Response(true,"Great! You answer is right");
+                return new Response(true, "Great! You answer is right");
+            }
+        } catch (Exception e) {
+            return new Response(false, e.toString());
         }
-        }catch (Exception e) {
-            return new Response(false,e.toString());
-        }
-        return new Response(false,"Wrong");
+        return new Response(false, "Wrong");
     }
 }

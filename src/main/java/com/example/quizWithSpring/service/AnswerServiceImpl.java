@@ -2,15 +2,17 @@ package com.example.quizWithSpring.service;
 
 import com.example.quizWithSpring.model.Answer;
 import com.example.quizWithSpring.repository.AnswerRep;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class AnswerServicelmpl implements AnswerService {
-    @Autowired
-    private AnswerRep answerRep;
+public class AnswerServiceImpl implements AnswerService {
+    private final AnswerRep answerRep;
+
+    public AnswerServiceImpl(AnswerRep answerRep) {
+        this.answerRep = answerRep;
+    }
 
     @Override
     public List<Answer> findAllAnswers() {

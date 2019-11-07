@@ -8,23 +8,25 @@ import com.example.quizWithSpring.service.AnswerService;
 import com.example.quizWithSpring.service.CategoryService;
 import com.example.quizWithSpring.service.QuestionService;
 import com.example.quizWithSpring.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 @Component
 public class Bootstrap implements CommandLineRunner {
-    @Autowired
-    private CategoryService categoryService;
+    private final CategoryService categoryService;
 
-    @Autowired
-    private QuestionService questionService;
+    private final QuestionService questionService;
 
-    @Autowired
-    private AnswerService answerService;
+    private final AnswerService answerService;
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
+
+    public Bootstrap(CategoryService categoryService, QuestionService questionService, AnswerService answerService, UserService userService) {
+        this.categoryService = categoryService;
+        this.questionService = questionService;
+        this.answerService = answerService;
+        this.userService = userService;
+    }
 
     @Override
     public void run(String... args) throws Exception {
